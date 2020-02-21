@@ -1,0 +1,73 @@
+<button class="btn btn-sm" (click)="promptAdd()">CREATE USER</button>
+
+<clr-modal [(clrModalOpen)]="isAdd" [clrModalSize]="'lg'">
+  <h3 class="modal-title">Add New User</h3>
+  <div class="modal-body">
+    <clr-alert *ngIf="isAlert" [clrAlertType]="'danger'">
+      <clr-alert-item>
+        <span class="alert-text"> {{ message }} </span>
+      </clr-alert-item>
+    </clr-alert>
+    <br />
+
+    <form clrForm [formGroup]="userForm" (ngSubmit)="addUser()">
+      <section class="form-block">
+        <div class="col-md-12">
+          <clr-input-container>
+            <label class="required clr-col-xs-12 clr-col-md-4">Username</label>
+            <input
+              class="required clr-col-xs-12 clr-col-md-5"
+              clrInput
+              formControlName="username"
+              type="text"
+              size="40"
+            />
+            <clr-control-error>This field is required!</clr-control-error>
+          </clr-input-container>
+        </div>
+
+        <div class="col-md-12">
+          <clr-input-container>
+            <label class="required clr-col-xs-12 clr-col-md-4">Email</label>
+            <input
+              class="required clr-col-xs-12 clr-col-md-5"
+              clrInput
+              formControlName="email"
+              type="email"
+              size="40"
+            />
+            <clr-control-error>Email is required!</clr-control-error>
+          </clr-input-container>
+        </div>
+
+        <div class="col-md-12">
+            <clr-select-container>
+                <label class="required clr-col-xs-12 clr-col-md-4"
+                >User Role</label
+                >
+                <select
+                clrSelect
+                class="required clr-col-xs-12 clr-col-md-5"
+                formControlName="roleId"
+                >
+                <option *ngFor="let role of userRoles" [value]="role?.id">
+                    {{ removeUnderscore(role?.name) | titlecase }}</option
+                >
+                </select>
+                <clr-control-error>This field is required!</clr-control-error>
+            </clr-select-container>
+        </div>
+
+      </section>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="isAdd = false">
+      Cancel
+    </button>
+    <button type="submit" class="btn btn-primary" (click)="addUser()">
+      Add
+    </button>
+  </div>
+</clr-modal>

@@ -1,0 +1,52 @@
+<div class="clr-row">
+    <div class="clr-col-lg-12 clr-col-md-12 clr-col-12">
+        <clr-alert *ngIf="isAddSuccess" [clrAlertType]="'success'">
+            <clr-alert-item>
+                <span class="alert-text">{{ placeholderMessage }} </span>
+            </clr-alert-item>
+        </clr-alert>
+        <div class="card">
+            <div class="card-header">
+                Users
+            </div>
+            <div class="card-block">
+                <app-add-users (isAddSuccess)="addSuccess($event)"  (addedUser)="addUser($event)"></app-add-users>
+                <br>
+                <br>
+
+                <clr-datagrid [clrDgLoading]="loading">
+                        <clr-dg-column [clrDgField]="'username'">Username</clr-dg-column>
+                        <clr-dg-column [clrDgField]="'email'">Email</clr-dg-column>
+                        <clr-dg-column [clrDgField]="'role'">Role</clr-dg-column>
+                        <clr-dg-column [clrDgField]="'dateCreated'">Created date</clr-dg-column>
+                        <clr-dg-column [clrDgField]="'enabled'">User Enabled</clr-dg-column>
+                        <clr-dg-placeholder>{{placeholderMessage}}</clr-dg-placeholder>
+                        <clr-dg-row *clrDgItems="let user of users">
+                        <clr-dg-action-overflow>
+                            <button class="action-item" (click)="promptEdit(user)">Edit</button>
+                            <button class="action-item" (click)="viewUser(user.id)">View</button>
+                        </clr-dg-action-overflow>
+                        <clr-dg-cell>{{user?.username}}</clr-dg-cell>
+                        <clr-dg-cell>{{user?.email}}</clr-dg-cell>
+                        <clr-dg-cell>{{user?.role.name}}</clr-dg-cell>
+                        <clr-dg-cell>{{formatDate(user?.dateCreated)}}</clr-dg-cell>
+                        <clr-dg-cell>
+                            <span *ngIf="user?.enabled" class="label label-success">Yes</span>
+                            <span *ngIf="!user?.enabled" class="label label-danger">No</span>
+                        </clr-dg-cell>
+                        </clr-dg-row>
+                    
+                        <clr-dg-footer>
+                            <clr-dg-pagination #pagination [clrDgTotalItems]="users?.length">
+                                <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Users per page</clr-dg-page-size>
+                                {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                                of {{users?.length}} Users
+                            </clr-dg-pagination>
+                        </clr-dg-footer>
+                    </clr-datagrid>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-edit-users *ngIf="isEdit" [user]="selectedUser" (updatedUser)="updateUser($event)"></app-edit-users>

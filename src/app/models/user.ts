@@ -1,0 +1,8 @@
+export class User {
+    public id: Number;
+    public email: String;
+    public username: String;
+    public dateCreated: string;
+    public enabled: boolean;
+
+}

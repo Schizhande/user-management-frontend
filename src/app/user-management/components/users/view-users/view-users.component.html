@@ -1,0 +1,49 @@
+<div class="card">
+  <div class="card-header">
+    <a routerLink="/home/users" routerLinkActive="active">
+      Users \
+    </a>User Information
+  
+  </div>
+  <div class="card-block">
+    <clr-alert *ngIf="isAlert" [clrAlertType]="'success'">
+      <clr-alert-item>
+        <span class="alert-text"> {{ message }} </span>
+      </clr-alert-item>
+    </clr-alert>
+    <clr-stack-view>
+      <clr-stack-block [clrStackViewLevel]="1" [clrStackViewSetsize]="2" [clrStackViewPosinset]="2">
+        <clr-stack-label>Username</clr-stack-label>
+        <clr-stack-content>{{user?.username}}</clr-stack-content>
+      </clr-stack-block>
+
+      <clr-stack-block [clrStackViewLevel]="1" [clrStackViewSetsize]="2" [clrStackViewPosinset]="2">
+        <clr-stack-label>Email</clr-stack-label>
+        <clr-stack-content>{{user?.email}}</clr-stack-content>
+      </clr-stack-block>
+
+      <clr-stack-block [clrStackViewLevel]="1" [clrStackViewSetsize]="2" [clrStackViewPosinset]="2">
+        <clr-stack-label>Role</clr-stack-label>
+        <clr-stack-content>{{user?.role.name}}</clr-stack-content>
+      </clr-stack-block>
+
+      <clr-stack-block [clrStackViewLevel]="1" [clrStackViewSetsize]="2" [clrStackViewPosinset]="2">
+        <clr-stack-label>Enabled</clr-stack-label>
+        <clr-stack-content>
+          <div>
+            <span *ngIf="user?.enabled" (click)="enableUser(user.id, false)"
+              class="btn btn-sm btn-warning">Disable</span>
+            <span *ngIf="!user?.enabled" (click)="enableUser(user.id,true)" class="btn btn-sm btn-success">Enable</span>
+          </div>
+        </clr-stack-content>
+      </clr-stack-block>
+
+      <clr-stack-block [clrStackViewLevel]="1" [clrStackViewSetsize]="2" [clrStackViewPosinset]="2">
+        <clr-stack-label>First Name</clr-stack-label>
+        <clr-stack-content>{{user?.userInformation?.firstName}}</clr-stack-content>
+      </clr-stack-block>
+
+    </clr-stack-view>
+    <br>
+  </div>
+</div>

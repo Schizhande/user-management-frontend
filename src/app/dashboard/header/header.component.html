@@ -1,0 +1,22 @@
+<header class="header-4">
+    <a class="logo-img">
+        <clr-icon shape="cag" class="logo"></clr-icon>
+      </a>
+  <div class="branding">
+    <a href="..." class="nav-link">
+      <span class="title">USER MANAGEMENT SYSTEM</span>
+    </a>
+  </div>
+  <div class="header-actions">
+    <clr-dropdown>
+      <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
+        simba@quatrohaus.com
+        <clr-icon shape="caret down"></clr-icon>
+      </button>
+      <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+        <a href="..." clrDropdownItem>Profile</a>
+        <a (click) ="logout()" clrDropdownItem>Log out</a>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+  </div>
+</header> 

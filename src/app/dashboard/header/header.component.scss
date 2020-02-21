@@ -1,0 +1,26 @@
+header {
+    height: 3rem;
+    &.header-4 {
+        background-color: #003366;
+        border-bottom-color: white
+    }
+}
+
+.dropdown-toggle {
+    height: 3rem !important;
+}
+
+.logo {
+    height: 3rem;
+    width: 8rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    color: #000000
+}
+
+.logo-img {
+    background: white;
+    color: blue($color: #000000);
+    width: 10rem;
+}
