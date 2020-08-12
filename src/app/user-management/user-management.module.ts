@@ -12,6 +12,12 @@ import { EditAuthorityComponent } from './components/authorities/edit-authority/
 import { DashboardRoutingModule } from '../dashboard/dashboard-routing.module';
 import { AddRoleComponent } from './components/groups/add-role/add-role.component';
 import { EditRoleComponent } from './components/groups/edit-role/edit-role.component';
+import { EditUserInformationComponent } from './components/user-infor/edit-user-information/edit-user-information.component';
+import { VerifyUserComponent } from './components/users/verify-user/verify-user.component';
+import { EnableUserComponent } from './components/users/enable-user/enable-user.component';
+import { ViewGroupComponent } from './components/groups/view-group/view-group.component';
+import { DisplayAuthoritiesComponent } from './components/authorities/display-authorities/display-authorities.component';
+
 
 
 
@@ -25,7 +31,12 @@ import { EditRoleComponent } from './components/groups/edit-role/edit-role.compo
     ListAuthoritiesComponent,
     EditAuthorityComponent,
     AddRoleComponent,
-    EditRoleComponent],
+    EditRoleComponent,
+    EditUserInformationComponent,
+    VerifyUserComponent,
+    EnableUserComponent,
+    ViewGroupComponent,
+    DisplayAuthoritiesComponent],
   imports: [
     CommonModule,
     ClarityModule,

@@ -1,49 +1,198 @@
 <div class="card">
   <div class="card-header">
     <a routerLink="/home/users" routerLinkActive="active">
-      Users \
-    </a>User Information
-  
+      Users
+    </a>\ User Details
+
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <div class="btn-group btn-outline-primary btn-sm ">
+      <button class="btn">Edit User</button>
+      <button class="btn">Change Password</button>
+      <button class="btn">Enable User</button>
+      <button class="btn">Delete User</button>
+    </div>
+
   </div>
   <div class="card-block">
-    <clr-alert *ngIf="isAlert" [clrAlertType]="'success'">
-      <clr-alert-item>
-        <span class="alert-text"> {{ message }} </span>
-      </clr-alert-item>
-    </clr-alert>
-    <clr-stack-view>
-      <clr-stack-block [clrStackViewLevel]="1" [clrStackViewSetsize]="2" [clrStackViewPosinset]="2">
-        <clr-stack-label>Username</clr-stack-label>
-        <clr-stack-content>{{user?.username}}</clr-stack-content>
-      </clr-stack-block>
 
-      <clr-stack-block [clrStackViewLevel]="1" [clrStackViewSetsize]="2" [clrStackViewPosinset]="2">
-        <clr-stack-label>Email</clr-stack-label>
-        <clr-stack-content>{{user?.email}}</clr-stack-content>
-      </clr-stack-block>
-
-      <clr-stack-block [clrStackViewLevel]="1" [clrStackViewSetsize]="2" [clrStackViewPosinset]="2">
-        <clr-stack-label>Role</clr-stack-label>
-        <clr-stack-content>{{user?.role.name}}</clr-stack-content>
-      </clr-stack-block>
-
-      <clr-stack-block [clrStackViewLevel]="1" [clrStackViewSetsize]="2" [clrStackViewPosinset]="2">
-        <clr-stack-label>Enabled</clr-stack-label>
-        <clr-stack-content>
-          <div>
-            <span *ngIf="user?.enabled" (click)="enableUser(user.id, false)"
-              class="btn btn-sm btn-warning">Disable</span>
-            <span *ngIf="!user?.enabled" (click)="enableUser(user.id,true)" class="btn btn-sm btn-success">Enable</span>
+    <clr-tabs>
+      <clr-tab>
+        <button clrTabLink id="link1">User information</button>
+        <clr-tab-content id="content1" *clrIfActive>
+          <br>
+          <div class="clr-row ">
+            <div class="clr-col-4">
+              <span><strong>First Name</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span>{{user?.userInformation?.firstName}}</span>
+            </div>
           </div>
-        </clr-stack-content>
-      </clr-stack-block>
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-4">
+              <span><strong>Last Name</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span>{{user?.userInformation?.lastName}}</span>
+            </div>
+          </div>
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-4">
+              <span><strong>Username</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span>{{user?.username}}</span>
+            </div>
+          </div>
 
-      <clr-stack-block [clrStackViewLevel]="1" [clrStackViewSetsize]="2" [clrStackViewPosinset]="2">
-        <clr-stack-label>First Name</clr-stack-label>
-        <clr-stack-content>{{user?.userInformation?.firstName}}</clr-stack-content>
-      </clr-stack-block>
+        </clr-tab-content>
+      </clr-tab>
+      <clr-tab>
+        <button clrTabLink>Contact Details</button>
+        <clr-tab-content *clrIfActive="true">
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-4">
+              <span><strong>Email</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span>{{user?.email}}</span>
+            </div>
+          </div>
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-4">
+              <span><strong>Phone Number</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span>{{user?.userInformation?.phoneNumber}}</span>
+            </div>
+          </div>
+        </clr-tab-content>
+      </clr-tab>
 
-    </clr-stack-view>
+      <clr-tab>
+        <button clrTabLink>Address</button>
+        <clr-tab-content *clrIfActive="true">
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-4">
+              <span><strong>Home Address</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span>{{user?.userInformation?.address?.homeAddress}}</span>
+            </div>
+          </div>
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-4">
+              <span><strong>Postal Address</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span>{{user?.userInformation?.address?.postalAddress}}</span>
+            </div>
+          </div>
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-4">
+              <span><strong>City</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span>{{user?.userInformation?.address?.city}}</span>
+            </div>
+          </div>
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-4">
+              <span><strong>Country</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span>{{user?.userInformation?.address?.country}}</span>
+            </div>
+          </div>
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-4">
+              <span><strong>State</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span>{{user?.userInformation?.address?.state}}</span>
+            </div>
+          </div>
+        </clr-tab-content>
+      </clr-tab>
+      <clr-tab>
+        <button clrTabLink>User Group</button>
+        <clr-tab-content *clrIfActive="true">
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-4">
+              <span><strong>Role</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span>{{user?.role?.name}}</span>
+            </div>
+          </div>
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-4">
+              <span><strong>Description</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span>{{user?.role?.description}}</span>
+            </div>
+          </div>
+        </clr-tab-content>
+      </clr-tab>
+      <clr-tab>
+        <button clrTabLink>Other General information</button>
+        <clr-tab-content *clrIfActive="true">
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-4">
+              <span><strong>User Enabled</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span *ngIf="user?.enabled" class="label label-success">Yes</span>
+              <span *ngIf="!user?.enabled" class="label label-danger">no</span>
+            </div>
+          </div>
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-4">
+              <span><strong>Created Date</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span>{{user?.dateCreated}}</span>
+            </div>
+          </div>
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-4">
+              <span><strong>Last Modified Date</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span>{{user?.dateModified}}</span>
+            </div>
+          </div>
+          <br>
+          <div class="clr-row">
+            <div class="clr-col-4">
+              <span><strong>User Deleted</strong></span>
+            </div>
+            <div class="clr-col-6">
+              <span *ngIf="user?.deleted" class="label label-success">Yes</span>
+              <span *ngIf="!user?.deleted" class="label label-danger">no</span>
+            </div>
+          </div>
+        </clr-tab-content>
+      </clr-tab>
+    </clr-tabs>
     <br>
   </div>
 </div>

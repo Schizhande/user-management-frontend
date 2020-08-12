@@ -16,7 +16,10 @@
             <div *ngIf="isAlert" class="error active">
                 {{placeholderMessage}}
             </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button type="submit" class="btn btn-primary" (click)="login()" [clrLoading]="loginState">
+                Sign in
+            </button>
+
         </div>
     </form>
 </div>

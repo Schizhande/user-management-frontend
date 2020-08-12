@@ -3,14 +3,14 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from '../models/user';
 
-const apiUrl = 'http://localhost:8089/v1/'
+const apiUrl = 'http://localhost:8087/v1/'
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-type': 'application/json'
   })
 }
-
+ 
 @Injectable({
   providedIn: 'root'
 })
@@ -43,6 +43,18 @@ export class UsersService {
     return this.http.patch<any>(apiUrl + "users/" + id + "?enable=" + enable, enable);
   }
 
+
+  getUserInformation(): Observable<any> {
+    return this.http.get<any>(apiUrl + "user-information/my-account");
+  }
+
+  editUserInformation(userInfo: any) {
+    return this.http.post<any>(apiUrl + "user-information/my-account", userInfo);
+  }
+
+  verifyUser(verifyToken: any) {
+    return this.http.post<any>(apiUrl + "users/verify", verifyToken);
+  }
 
 
 }

@@ -3,13 +3,13 @@ import { Role } from '../models/role';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-const apiUrl = 'http://localhost:8089/v1/'
+const apiUrl = 'http://localhost:8087/v1/'
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoleService {
-
+ 
   public roles: Role[];
 
   constructor(private http: HttpClient) { }
@@ -23,12 +23,20 @@ export class RoleService {
     return this.http.put<any>(apiUrl + 'roles/' + role.id, role);
   }
 
-  getRoles() : Observable<any> {
+  getRoles(): Observable<any> {
     return this.http.get<any>(apiUrl + 'roles/all');
   }
 
-  getRole(id) : Observable<any> {
-    return this.http.get<any>(apiUrl + 'roles/'+ id);
+  getRole(id): Observable<any> {
+    return this.http.get<any>(apiUrl + 'roles/' + id);
+  }
+
+  assignPermissions(assignPermissions: any): Observable<any> {
+    return this.http.post<any>(apiUrl + 'roles/assign-permissions', assignPermissions)
+  }
+
+  unAssignPermissions(assignPermissions: any): Observable<any> {
+    return this.http.post<any>(apiUrl + 'roles/un-assign-permissions', assignPermissions)
   }
 
 }

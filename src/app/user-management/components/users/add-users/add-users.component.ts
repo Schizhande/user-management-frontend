@@ -59,7 +59,7 @@ export class AddUsersComponent implements OnInit {
   }
 
   public addUser() {
-    this.addState = ClrLoadingState.DEFAULT;
+    this.addState = ClrLoadingState.LOADING;
     this.usersService
       .createUser(this.userForm.value)
       .subscribe(data => {

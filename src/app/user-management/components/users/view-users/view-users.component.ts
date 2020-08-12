@@ -31,6 +31,7 @@ export class ViewUsersComponent implements OnInit {
       if (id) {
         this.userService.getUser(id).subscribe((user: any) => {
           if (user) {
+            console.log(user);
             this.user = user;
           } else {
             console.log(`user with id '${id}' not found, returning to list`);

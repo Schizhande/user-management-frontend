@@ -55,7 +55,7 @@ export class ListRolesComponent implements OnInit {
   }
 
   public viewRole(id) {
-    this.router.navigate(['roles/' + id]);
+    this.router.navigate(['home/roles/' + id]);
   }
 
   public addSuccess(event) {

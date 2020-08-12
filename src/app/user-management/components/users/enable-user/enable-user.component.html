@@ -1,0 +1,29 @@
+<clr-modal [(clrModalOpen)]="opened" [clrModalClosable]="false" [clrModalSize]="'sm'">
+    <div class="modal-body">
+        <form clrForm [formGroup]="userForm" (ngSubmit)="enableUser()">
+            <section class="form-block">
+                <div class="col-md-12">
+
+                    <clr-toggle-container>
+                        <clr-toggle-wrapper>
+                          <input class="col-md-12" type="checkbox" clrToggle name="enabled"  formControlName="enabled" />
+                          <label >Enable user</label>
+                        </clr-toggle-wrapper>
+                        <clr-control-helper>Use switch button to enable or disable user  </clr-control-helper>
+                        <clr-control-error>This field is required!</clr-control-error>
+                      </clr-toggle-container>
+                </div> 
+
+            </section>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="onClose(user)">
+            Cancel
+        </button>
+        <button type="submit" class="btn btn-primary" (click)="enableUser()" [clrLoading]="addState">
+            Save
+        </button>
+    </div>
+</clr-modal>

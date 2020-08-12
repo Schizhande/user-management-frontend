@@ -18,7 +18,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     if (token) {
       if(!request.headers.has('Authorization')){
         request = request.clone({
@@ -32,7 +32,7 @@ export class TokenInterceptor implements HttpInterceptor {
     if (!request.headers.has('Content-Type')) {
       request = request.clone({
         setHeaders: {
-          'content-type': 'application/json'
+          'Content-type': 'application/json'
         }
       });
     }
@@ -42,7 +42,7 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-          console.log('event--->>>', event);
+         // console.log('event--->>>', event);
         }
         return event;
       }),

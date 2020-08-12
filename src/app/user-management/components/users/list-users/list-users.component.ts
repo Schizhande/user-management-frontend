@@ -15,6 +15,7 @@ export class ListUsersComponent implements OnInit {
   public loading = true;
   public users: any;
   public isEdit: boolean;
+  public isUserEnable: boolean;
   public isStatusChange: boolean;
   public selectedUser: User;
   public placeholderMessage: string;
@@ -54,6 +55,11 @@ export class ListUsersComponent implements OnInit {
     this.isEdit = false;
   }
 
+  public enableUser(event) {
+    this.users.splice(this.users.indexOf(this.selectedUser), 1, event);
+    this.isUserEnable = false;
+  }
+
   public viewUser(id) {
     this.router.navigate(['home/users/' + id]);
   }
@@ -70,5 +76,11 @@ export class ListUsersComponent implements OnInit {
   public addUser(event) {
     console.log(event);
     this.users.push(event);
+  }
+
+  public promptEnable(content) {
+    this.isUserEnable = true;
+    this.selectedUser = content;
+    console.log("enable user "+ content.id)
   }
 }

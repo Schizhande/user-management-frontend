@@ -1,0 +1,97 @@
+<div class="card">
+    <div class="card-header">
+        <a routerLink="/home/roles" routerLinkActive="active">
+            Groups
+        </a>\ Group Details
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-block">
+        <div class="clr-row">
+            <div class="clr-col-3">
+               <strong>Name</strong>
+            </div>
+            <div class="clr-col-3">
+                <span>{{group?.name}}</span>
+            </div>
+        </div>
+        <div class="clr-row">
+            <div class="clr-col-3">
+                <strong>Description</strong>
+             </div>
+             <div class="clr-col">
+                 <span>{{group?.description}}</span>
+             </div>
+        </div>
+        <hr>
+        <div class="clr-row">
+            <div class="clr-col-5">
+                <h5>Assigned Authorities</h5>
+                <clr-datagrid [(clrDgSelected)]="selectedAssignedAuthorities" [clrDgRowSelection]="true">
+                    <clr-dg-action-bar>
+                        <div class="btn-group btn-outline-primary btn-sm">
+                            <button type="button" class="btn " (click)="unAssignAuthority()" [disabled]="selectedAssignedAuthorities.length == 0" ><clr-icon shape="close"></clr-icon> UnAssign Authority from Group</button>
+                            <button type="button" class="btn" (click)="promptEdit(selectedAssignedAuthorities[0])" *ngIf="selectedAssignedAuthorities.length == 1"><clr-icon shape="pencil"></clr-icon> Edit</button>
+                        </div>
+                    </clr-dg-action-bar>
+                    <clr-dg-column [clrDgField]="'authority'">Name</clr-dg-column>
+                    <clr-dg-column [clrDgField]="'description'">Description</clr-dg-column>
+                    <!-- <clr-dg-column [clrDgField]="'dateCreated'">Created date</clr-dg-column> -->
+                    <clr-dg-placeholder>{{placeholderMessage}}</clr-dg-placeholder>
+                    <clr-dg-row *clrDgItems="let authority of assignedAuthorities" [clrDgItem]="authority">
+                        <clr-dg-cell>{{removeUnderscore(authority?.authority)}}</clr-dg-cell>
+                        <clr-dg-cell>{{authority?.description}}</clr-dg-cell>
+                        <!-- <clr-dg-cell>{{authority?.dateCreated}}</clr-dg-cell> -->
+                    </clr-dg-row>
+                    <!-- <clr-dg-footer>
+                        <clr-dg-pagination #pagination [clrDgTotalItems]="roles?.length">
+                            <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Authorities per page
+                            </clr-dg-page-size>
+                            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                            of {{roles?.length}} Authorities
+                        </clr-dg-pagination>
+                    </clr-dg-footer> -->
+                </clr-datagrid>
+            </div>
+            <div class="clr-col-1">
+
+            </div>
+            <div class="clr-col">
+                <h5>Un Assigned Authorities</h5>
+                <clr-datagrid [(clrDgSelected)]="selectedUnAssignedAuthorities" [clrDgRowSelection]="true">
+                    <clr-dg-action-bar>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-secondary" (click)="assignAuthority()" [disabled]="selectedUnAssignedAuthorities.length == 0"><clr-icon shape="plus"></clr-icon> Assign authority
+                                to group</button>
+                            <button type="button" class="btn btn-sm btn-secondary" (click)="promptEdit(selectedUnAssignedAuthorities[0])" *ngIf="selectedUnAssignedAuthorities.length == 1"><clr-icon shape="pencil"></clr-icon> Edit</button>
+                        </div>
+                    </clr-dg-action-bar>
+                    <clr-dg-column [clrDgField]="'authority'">Name</clr-dg-column>
+                    <clr-dg-column [clrDgField]="'description'">Description</clr-dg-column>
+                    <clr-dg-column [clrDgField]="'dateCreated'">Created date</clr-dg-column>
+                    <clr-dg-placeholder>{{placeholderMessage}}</clr-dg-placeholder>
+                    <clr-dg-row *clrDgItems="let authority of unAssignedAuthorities" [clrDgItem]="authority">
+                        <clr-dg-cell>{{removeUnderscore(authority?.authority)}}</clr-dg-cell>
+                        <clr-dg-cell>{{authority?.description}}</clr-dg-cell>
+                        <clr-dg-cell>{{authority?.dateCreated}}</clr-dg-cell>
+                    </clr-dg-row>
+                    <clr-dg-footer>
+                        <clr-dg-pagination #pagination [clrDgTotalItems]="roles?.length">
+                            <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Authorities per page
+                            </clr-dg-page-size>
+                            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                            of {{roles?.length}} Authorities
+                        </clr-dg-pagination>
+                    </clr-dg-footer>
+                </clr-datagrid>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<app-edit-authority *ngIf="isEdit" [authority]="selectedAuthority" (updatedAuthority)="updateAuthority($event)"></app-edit-authority>
+
+<app-display-authorities [unAssignedAuthorities]= "unAssignedAuthorities"></app-display-authorities>

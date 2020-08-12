@@ -25,6 +25,7 @@
                         <clr-dg-action-overflow>
                             <button class="action-item" (click)="promptEdit(user)">Edit</button>
                             <button class="action-item" (click)="viewUser(user.id)">View</button>
+                            <button class="action-item" (click) ="promptEnable(user)">Enable user</button>
                         </clr-dg-action-overflow>
                         <clr-dg-cell>{{user?.username}}</clr-dg-cell>
                         <clr-dg-cell>{{user?.email}}</clr-dg-cell>
@@ -50,3 +51,5 @@
 </div>
 
 <app-edit-users *ngIf="isEdit" [user]="selectedUser" (updatedUser)="updateUser($event)"></app-edit-users>
+
+<app-enable-user *ngIf="isUserEnable" [user] = "selectedUser" (enabledUser)= "enableUser($event)"></app-enable-user>

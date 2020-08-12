@@ -12,14 +12,18 @@ export class AuthGuardService {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot):  Observable<boolean> | boolean | Promise<boolean> {
+    state: RouterStateSnapshot): Observable<boolean> | boolean | Promise<boolean> {
     const url: string = state.url;
 
     if (this.authService.isAuthenticated()) {
       return true;
     }
 
-    this._router.navigate(['auth/login']);
+    this._router.navigate(['auth/login'], {
+      queryParams: {
+        returnUrl: url
+      }
+    });
     return false;
   }
 }

@@ -17,16 +17,22 @@
                 <clr-datagrid [clrDgLoading]="loading">
                         <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
                         <clr-dg-column [clrDgField]="'email'">description</clr-dg-column>
+                        <clr-dg-column [clrDgField]="'permissions'">Permissions</clr-dg-column>
                         <clr-dg-column [clrDgField]="'dateCreated'">Created date</clr-dg-column>
                         <clr-dg-placeholder>{{placeholderMessage}}</clr-dg-placeholder>
                         <clr-dg-row *clrDgItems="let role of roles">
                         <clr-dg-action-overflow>
                             <button class="action-item" (click)="promptEdit(role)">Edit</button>
-                            <button class="action-item" (click)="viewrole(role.id)">View</button>
+                            <button class="action-item" (click)="viewRole(role.id)">View</button>
                         </clr-dg-action-overflow>
                         <clr-dg-cell>{{role?.name}}</clr-dg-cell>
                         <clr-dg-cell>{{role?.description}}</clr-dg-cell>
-                    
+                        <clr-dg-cell>
+                            <a routerLink="/home/roles/{{role.id}}"  class="label label-blue clickable">
+                                assigned 
+                                <span class="badge badge-blue"> {{role?.permissions?.length}}</span>
+                            </a>
+                        </clr-dg-cell>
                         <clr-dg-cell>{{formatDate(role?.dateCreated)}}</clr-dg-cell>
                         </clr-dg-row>
                     

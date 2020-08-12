@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-const apiUrl = 'http://localhost:8089/oauth/check_token'
+const apiUrl = 'http://localhost:8087/oauth/check_token'
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private _router: Router, private http: HttpClient) { }
 
   isAuthenticated(): boolean {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
 
     return token != null && !this.isTokenExpired(token);
   }
@@ -33,9 +33,11 @@ export class AuthService {
         }
       },
         err => {
-          alert(err.error.message
-            ? err.error.message
-            : 'An error occurred whilst checking token ');
+          if(err.error.message){
+            alert(err.error.message);
+          }else{
+            alert(err.error.error_description);
+          }
         }
 
       );
@@ -44,7 +46,7 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.clear();
+    sessionStorage.clear();
     this._router.navigate(['auth/login']);
   }
 }

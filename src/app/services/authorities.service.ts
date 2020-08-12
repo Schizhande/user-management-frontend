@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Authority } from '../models/authority';
 
-const apiUrl = 'http://localhost:8089/v1/user-permission/'
+const apiUrl = 'http://localhost:8087/v1/user-permission/'
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,14 @@ export class AuthoritiesService {
 
   getAuthority(id): Observable<any> {
     return this.http.get<any>(apiUrl + id);
+  }
+
+  getAssignedAuthorities(id): Observable<any> {
+    return this.http.get<any>(apiUrl + "assigned/" + id)
+  }
+
+  getUnAssignedAuthorities(id): Observable<any> {
+    return this.http.get<any>(apiUrl + "un-assigned/" + id)
   }
 
 }
